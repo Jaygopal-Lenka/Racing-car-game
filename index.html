@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body{
+	background-image: url("racing.gif");
+    background-position: center;
+    background-size: cover;
+}
+#myCanvas
+{
+	border-width:10px;
+	background-color: white; 
+	border-style:ridge;
+}
+
+h1,h4
+{
+	color: white !important;
+}
+</style>		
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<title>Car racing game</title>
+</head>
+<body onload="add()">
+<center>
+<h1>Car racing game</h1>
+<h2>Game Status :<span id="game_status"></span></h2>
+<canvas id="myCanvas" height="600" width="800"></canvas>
+<h4>
+	<b class="text-danger">NOTE : </b> IF THE CARS ARE NOT VISIBLE PRESS ANY ARROW KEY
+</h4>
+</center>
+</body>
+</html>
+<script>
+    canvas=document.getElementById("myCanvas");
+    ctx= canvas.getContext("2d");
+
+    background_image="racing.jpg";
+
+    car1_width=120;
+    car1_height=70;
+    car1_image="car1.png";
+    car1_x=10;
+    car1_y=10;
+
+    car2_width=120;
+    car2_height=70;
+    car2_image="car2.png";
+    car2_x=10;
+    car2_y=100;
+
+    function add(){
+        background_img_tg=  new Image();
+        background_img_tg.onload=uploadBackground;
+        background_img_tg.src=background_image;
+
+        car1_img_tg=  new Image();
+        car1_img_tg.onload=uploadcar1;
+        car1_img_tg.src=car1_image;
+
+        car2_img_tg=  new Image();
+        car2_img_tg.onload=uploadcar2;
+        car2_img_tg.src=car2_image;
+    }
+    function uploadBackground(){
+        ctx.drawImage(background_img_tg,0,0,canvas.width,canvas.height);
+    }
+    function uploadcar1(){
+        ctx.drawImage(car1_img_tg,car1_x,car1_y,car1_width,car1_height);
+    }
+    function uploadcar2(){
+        ctx.drawImage(car2_img_tg,car2_x,car2_y,car2_width,car2_height);
+    }
+    window.addEventListener("keydown",myKeydown);
+
+    function myKeydown(e) {
+        keyPressed=e.keyCode;
+        console.log(keyPressed);
+        if(keyPressed=='38'){
+            car1_up();
+        }
+        if(keyPressed=='40'){
+            car1_down();
+        }
+        if(keyPressed=='37'){
+            car1_left();
+        }
+        if(keyPressed=='39'){
+            car1_right();
+        }
+        if(keyPressed=="87"){      
+            car2_up();
+        }
+        if(keyPressed=='83'){       
+            car2_down();
+        }
+        if(keyPressed=='65'){     
+            car2_left();
+        }
+        if(keyPressed=='68'){     
+            car2_right();
+        }
+    }
+    
+
+</script>
